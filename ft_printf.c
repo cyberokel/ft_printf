@@ -1,5 +1,6 @@
 #include "libft.h"
 #include <stdarg.h>
+#include <stdio.h>
 void	check_type(char indice, va_list ap)
 {
 	if (indice == 'c')
@@ -8,6 +9,7 @@ void	check_type(char indice, va_list ap)
 		ft_putnbr_fd(va_arg(ap, int), 1);
 	else if (indice == 's')
 		ft_putstr_fd(va_arg(ap, char *), 1);
+//	return (count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -30,6 +32,7 @@ int	ft_printf(const char *format, ...)
 			i++;
 		}
 		ft_putchar_fd(format[i], 1);
+		count++;
 		i++;
 	}
 	return (count);
@@ -37,5 +40,5 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	ft_printf("aywa %d ds", 42);
+	printf("%x\n",ft_printf("%d aywa %d ds\n", 42, 24));
 }
