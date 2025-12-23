@@ -1,16 +1,13 @@
-void	check_type(char c, ...)
+#include "libft.h"
+#include <stdarg.h>
+void	check_type(char indice, va_list ap)
 {
-	if (c == s)
-		while(srt[i])
-		{
-			write(1, &str[i], 1);
-			i++;
-		}
-	else if(c == d)
-		ft_putnbr();
-	else if (c == c)
-		write(1, &c, 1);
-	return i;
+	if (indice == 'c')
+		ft_putchar_fd(va_arg(ap, int), 1);
+	else if (indice == 'd')
+		ft_putnbr_fd(va_arg(ap, int), 1);
+	else if (indice == 's')
+		ft_putstr_fd(va_arg(ap, char *), 1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -22,12 +19,23 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	count = 0;
-	if (format == NULL)
-		return (count);
-	while (*format)
+//	if (format[i] == NULL)
+//		return (count);
+	while (format[i])
 	{
 		if (format[i] == '%')
+		{
+			i++;
+			check_type(format[i], ap);
+			i++;
+		}
+		ft_putchar_fd(format[i], 1);
 		i++;
 	}
 	return (count);
+}
+
+int	main()
+{
+	ft_printf("aywa %d ds", 42);
 }
