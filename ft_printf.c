@@ -1,7 +1,15 @@
-//#include "libft.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
+
+int	ft_putchar(char c)
+{
+	int	count;
+
+	count	= 1;
+	write(1, &c, 1);
+	return (count);
+}
 
 int	ft_strlen(char *s)
 {
@@ -10,12 +18,7 @@ int	ft_strlen(char *s)
 	i = 0;
 	while(s[i])
 		i++;
-	return i;
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
+	return (i);
 }
 
 int	ft_checkbase(char *base)
@@ -61,21 +64,40 @@ int	ft_putnbr_base(int nbr, char *base)
 	ft_putchar(base[n % len]);
 	return (count);
 }
+
+int	ft_putstr(char	*str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while(str[i])
+	{
+		count += ft_putchar(str[i]);
+		i++;
+	}
+	return (count);
+}
+
 int	check_format(char indice, va_list ap)
 {
 	int	count;
 
 	count = 0;
-//	if (indice = NULL)
-//		return (0);
-	if (indice == 'c')
+	if (indice == '\0')
+		return (0);
+	else if (indice == 'c')
+	{
 		ft_putchar(va_arg(ap, int));
+		count++;
+	}
 	else if (indice == 'd' || indice == 'i'|| indice == 'u')
-		ft_putnbr_base(va_arg(ap, int), "0123456789");
+		count += ft_putnbr_base(va_arg(ap, int), "0123456789");
 	else if (indice == 'x' || indice == 'X')
-		ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
-//	else if (indice == 's')
-//		ft_putstr_fd(va_arg(ap, char *), 1);
+		count += ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
+	else if (indice == 's')
+		count = ft_putstr(va_arg(ap, char *));
 	return (count);
 }
 
@@ -88,17 +110,20 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	count = 0;
-//	if (format[i] == NULL)
-//		return (count);
+	if (format == NULL)
+		return (count);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			check_format(format[i], ap);
+			count += check_format(format[i], ap);
 		}
-		ft_putchar(format[i]);
-		count++;
+		else 
+		{
+			ft_putchar(format[i]);
+			count++;
+		}
 		i++;
 	}
 	return (count);
@@ -106,5 +131,5 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	ft_printf("%x", 123);
-}
+	ft_printf("%s", "123");
+}	
