@@ -45,19 +45,18 @@ int	ft_checkbase(char *base)
 	return (1);
 }
 
-int	ft_putnbr_base(int nbr, char *base)
+int	ft_putnbr_base(long n, char *base)
 {
 	int	len;
-	long	n;
 	int	count;
 
-	n = nbr;
+	ft_checkbase(base);
 	len = ft_strlen(base);
-	count = 0;
-	if (n < -1)
+	count = 1;
+	if (n < 0)
 	{
 		n = -n;
-		ft_putchar('-');
+		count += ft_putchar('-');
 	}
 	if (n >= len)
 		count += ft_putnbr_base(n / len, base);
@@ -88,14 +87,22 @@ int	check_format(char indice, va_list ap)
 	if (indice == '\0')
 		return (0);
 	else if (indice == 'c')
-	{
-		ft_putchar(va_arg(ap, int));
-		count++;
-	}
-	else if (indice == 'd' || indice == 'i'|| indice == 'u')
+		count += ft_putchar(va_arg(ap, int));
+	else if (indice == '%')
+		count += ft_putchar('%');
+	else if (indice == 'd' || indice == 'i')
 		count += ft_putnbr_base(va_arg(ap, int), "0123456789");
-	else if (indice == 'x' || indice == 'X')
-		count += ft_putnbr_base(va_arg(ap, int), "0123456789abcdef");
+	else if (indice == 'u')
+		count += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789");
+	else if (indice == 'x')
+		count += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789abcdef");
+	else if (indice == 'X')
+		count += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
+	else if (indice == 'p')
+	{
+		count += ft_putstr("0x");
+		count += ft_putnbr_base(va_arg(ap, unsigned long), "0123456789abcdef");
+	}
 	else if (indice == 's')
 		count = ft_putstr(va_arg(ap, char *));
 	return (count);
@@ -131,5 +138,8 @@ int	ft_printf(const char *format, ...)
 
 int	main()
 {
-	ft_printf("%s", "123");
+	ft_printf("= %d\n", ft_printf("j'ai 100 %c", '$'));
+	ft_printf("= %d\n", ft_printf("j'ai 100 %i", 400));
+	ft_printf("= %d\n", ft_printf("j'ai 100 %s", "euros"));
+	ft_printf("= %d\n", ft_printf("j'ai 100 %X", 234));	
 }	
