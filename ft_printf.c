@@ -13,6 +13,8 @@ int	ft_putchar(char c)
 
 int	ft_strlen(char *s)
 {
+	if (s == NULL)
+		return (0);
 	int	i;
 
 	i = 0;
@@ -50,7 +52,8 @@ int	ft_putnbr_base(long n, char *base)
 	int	len;
 	int	count;
 
-	ft_checkbase(base);
+	if(!ft_checkbase(base))
+		return(0);
 	len = ft_strlen(base);
 	count = 1;
 	if (n < 0)
@@ -66,6 +69,8 @@ int	ft_putnbr_base(long n, char *base)
 
 int	ft_putstr(char	*str)
 {
+	if (str == NULL)
+		return (0);
 	int	i;
 	int	count;
 
@@ -104,7 +109,7 @@ int	check_format(char indice, va_list ap)
 		count += ft_putnbr_base(va_arg(ap, unsigned long), "0123456789abcdef");
 	}
 	else if (indice == 's')
-		count = ft_putstr(va_arg(ap, char *));
+		count += ft_putstr(va_arg(ap, char *));
 	return (count);
 }
 
@@ -121,7 +126,7 @@ int	ft_printf(const char *format, ...)
 		return (count);
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1] != '\0')
 		{
 			i++;
 			count += check_format(format[i], ap);
