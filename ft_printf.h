@@ -6,7 +6,7 @@
 /*   By: akhalidi <akhalidi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 18:48:30 by akhalidi          #+#    #+#             */
-/*   Updated: 2026/01/31 19:16:03 by akhalidi         ###   ########.fr       */
+/*   Updated: 2026/02/01 19:27:01 by akhalidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdarg.h>
 
 int	ft_putchar(char c);
-int	ft_strlen(char* s);
+int	ft_strlen(char	*s);
 int	ft_putnbr_base(long n, char *base);
-int	ft_putstr(char	*str);
+int	ft_putstr(char *str);
 int	ft_putnbr(int n);
 
 #endif

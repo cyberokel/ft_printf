@@ -1,46 +1,17 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akhalidi <akhalidi@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/31 17:10:09 by akhalidi          #+#    #+#             */
+/*   Updated: 2026/02/01 19:48:37 by akhalidi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+//#include <stdio.h>
 #include "ft_printf.h"
-
-int	ft_putchar(char c)
-{
-	int	count;
-
-	count	= 1;
-	write(1, &c, 1);
-	return (count);
-}
-
-int	ft_strlen(char *s)
-{
-	if (s == NULL)
-		return (0);
-	int	i;
-
-	i = 0;
-	while(s[i])
-		i++;
-	return (i);
-}
-
-int	ft_putstr(char	*str)
-{
-	if (str == NULL)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while(str[i])
-	{
-		count += ft_putchar(str[i]);
-		i++;
-	}
-	return (count);
-}
 
 int	check_ptr(unsigned long ptr)
 {
@@ -85,15 +56,18 @@ int	check_format(char indice, va_list ap)
 
 int	ft_printf(const char *format, ...)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 	va_list	ap;
-	va_start(ap, format);
 
+	va_start(ap, format);
 	i = 0;
 	count = 0;
 	if (format == NULL)
+	{
+		va_end(ap);
 		return (count);
+	}
 	while (format[i])
 	{
 		if (format[i] == '%' && format[i + 1] != '\0')
@@ -101,21 +75,36 @@ int	ft_printf(const char *format, ...)
 			i++;
 			count += check_format(format[i], ap);
 		}
-		else 
-		{
-			ft_putchar(format[i]);
-			count++;
-		}
+		else
+			count += ft_putchar(format[i]);
 		i++;
 	}
+	va_end(ap);
 	return (count);
 }
-int	main()
+/*int	main()
 {
-ft_printf("%d", 0);
-ft_printf("%d", -2147483648);
-ft_printf("%s", NULL);
-ft_printf("%p", NULL);
-ft_printf("%%");
-ft_printf("%x", 0);
-}
+	//ft_printf("%d", 0);
+//	printf("%d\n",ft_printf("%s", "-2147483648"));
+//	ft_printf("%s", NULL);
+//	ft_printf("%p", NULL);
+//	ft_printf("%%");
+//	ft_printf("%x", 0);
+    printf("=== Testing %%c ===\n");
+    printf("Real:   %d\n", printf("%c\n", 'A'));
+    printf("Yours:  %d\n", ft_printf("%c\n", 'A'));
+    
+    printf("\n=== Testing %%s ===\n");
+    printf("Real:   %d\n", printf("%s\n", "Hello"));
+    printf("Yours:  %d\n", ft_printf("%s\n", "Hello"));
+    
+    printf("\n=== Testing %%d ===\n");
+    printf("Real:   %d\n", printf("%d\n", 42));
+    printf("Yours:  %d\n", ft_printf("%d\n", 42));
+    
+    printf("\n=== Testing %%d with negative ===\n");
+    printf("Real:   %d\n", printf("%d\n", -42));
+    printf("Yours:  %d\n", ft_printf("%d\n", -42));
+    
+    // Add more tests...
+}*/
