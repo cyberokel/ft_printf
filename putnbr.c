@@ -19,10 +19,10 @@ int	ft_putnbr_base(long n, char *base)
 	int	count;
 
 	len = ft_strlen(base);
-	count = 1;
+	count = 0;
 	if (n >= len)
 		count += ft_putnbr_base(n / len, base);
-	ft_putchar(base[n % len]);
+	count += ft_putchar(base[n % len]);
 	return (count);
 }
 
@@ -48,9 +48,4 @@ int	ft_putnbr(int n)
 		count += ft_putchar(((n % 10) + '0'));
 	}
 	return (count);
-}
-
-int main()
-{
-	ft_putnbr(54321);
 }

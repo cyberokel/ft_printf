@@ -1,6 +1,4 @@
-#include <stdarg.h>
 #include <stdio.h>
-#include <unistd.h>
 #include "ft_printf.h"
 
 int	ft_putchar(char c)
@@ -27,7 +25,10 @@ int	ft_strlen(char *s)
 int	ft_putstr(char	*str)
 {
 	if (str == NULL)
-		return (0);
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	int	i;
 	int	count;
 
@@ -37,6 +38,21 @@ int	ft_putstr(char	*str)
 	{
 		count += ft_putchar(str[i]);
 		i++;
+	}
+	return (count);
+}
+
+int	check_ptr(unsigned long ptr)
+{
+	int	count;
+
+	count = 0;
+	if (ptr == 0)
+		count += ft_putstr("(nil)");
+	else
+	{
+		count += ft_putstr("0x");
+		count += ft_putnbr_base(ptr, "0123456789abcdef");
 	}
 	return (count);
 }
@@ -61,10 +77,7 @@ int	check_format(char indice, va_list ap)
 	else if (indice == 'X')
 		count += ft_putnbr_base(va_arg(ap, unsigned int), "0123456789ABCDEF");
 	else if (indice == 'p')
-	{
-		count += ft_putstr("0x");
-		count += ft_putnbr_base(va_arg(ap, unsigned long), "0123456789abcdef");
-	}
+		count += check_ptr(va_arg(ap, unsigned long));
 	else if (indice == 's')
 		count += ft_putstr(va_arg(ap, char *));
 	return (count);
@@ -99,10 +112,10 @@ int	ft_printf(const char *format, ...)
 }
 int	main()
 {
-//	ft_printf("= %d\n", ft_printf("j'ai 100 %c", '$'));
-//	ft_printf("= %d\n", ft_printf("j'ai 100 %i", 400));
-//	ft_printf("= %d\n", ft_printf("j'ai 100 %s", "euros"));
-//	ft_printf("= %d\n", ft_printf("j'ai 100 %X", 234));
-printf("%d",printf("%s", NULL));
+ft_printf("%d", 0);
+ft_printf("%d", -2147483648);
+ft_printf("%s", NULL);
+ft_printf("%p", NULL);
+ft_printf("%%");
+ft_printf("%x", 0);
 }
-	
