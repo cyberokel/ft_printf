@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <stdio.h>
 #include "ft_printf.h"
 
 int	check_ptr(unsigned long ptr)
@@ -82,29 +81,3 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	return (count);
 }
-/*int	main()
-{
-	//ft_printf("%d", 0);
-//	printf("%d\n",ft_printf("%s", "-2147483648"));
-//	ft_printf("%s", NULL);
-//	ft_printf("%p", NULL);
-//	ft_printf("%%");
-//	ft_printf("%x", 0);
-    printf("=== Testing %%c ===\n");
-    printf("Real:   %d\n", printf("%c\n", 'A'));
-    printf("Yours:  %d\n", ft_printf("%c\n", 'A'));
-    
-    printf("\n=== Testing %%s ===\n");
-    printf("Real:   %d\n", printf("%s\n", "Hello"));
-    printf("Yours:  %d\n", ft_printf("%s\n", "Hello"));
-    
-    printf("\n=== Testing %%d ===\n");
-    printf("Real:   %d\n", printf("%d\n", 42));
-    printf("Yours:  %d\n", ft_printf("%d\n", 42));
-    
-    printf("\n=== Testing %%d with negative ===\n");
-    printf("Real:   %d\n", printf("%d\n", -42));
-    printf("Yours:  %d\n", ft_printf("%d\n", -42));
-    
-    // Add more tests...
-}*/
