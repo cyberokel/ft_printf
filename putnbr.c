@@ -6,13 +6,13 @@
 /*   By: akhalidi <akhalidi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 17:10:09 by akhalidi          #+#    #+#             */
-/*   Updated: 2026/02/01 20:21:34 by akhalidi         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:14:52 by akhalidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_base(long n, char *base)
+int	ft_putnbr_base(unsigned long n, char *base)
 {
 	int	len;
 	int	count;
