@@ -46,4 +46,28 @@ ft_printf("Hello %s, you have %d points\n", "World", 42);
 ### Documentation and Learning Materials
 - [Linux man pages for printf](https://man7.org/linux/man-pages/man3/printf.3.html)
 - [stdarg.h documentation](https://en.cppreference.com/w/c/variadic)
-- [Understanding variadic functions in C](https://www.geeksforgeeks.org/c/variadic-functions-in-c/)
+- [Understanding variadic functions in C](https://www.cprogramming.com/tutorial/c/lesson17.html)
+
+### AI Usage
+
+I used Claude (AI assistant) as a learning mentor throughout this project:
+
+**Concepts I learned with AI guidance:**
+- Understanding signed vs unsigned integers and how casting works
+- How bits are interpreted differently (two's complement)
+- Makefile structure and syntax (variables, pattern rules, special symbols like `$@` and `$<`)
+- Variadic functions and the va_list API
+
+**How I used AI:**
+- Asked for explanations and hints, NOT direct code solutions
+- Requested step-by-step breakdowns of complex concepts
+- Got debugging hints (e.g., "check if your negative handling works for unsigned types")
+- Learned through questions and practical examples
+
+**What I coded myself:**
+- All function implementations (ft_printf, ft_putnbr, ft_putstr, ft_putnbr_base, etc.)
+- Handling of all format specifiers (%c, %s, %p, %d, %i, %u, %x, %X, %%)
+- Edge cases (NULL pointers, INT_MIN, NULL strings)
+- The complete Makefile based on understanding the concepts
+
+I followed 42's AI guidelines by using AI for learning and understanding, not for copying solutions. All code was written by me after grasping the underlying concepts.
