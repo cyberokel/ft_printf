@@ -6,7 +6,7 @@
 /*   By: akhalidi <akhalidi@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 17:10:09 by akhalidi          #+#    #+#             */
-/*   Updated: 2026/02/13 18:14:52 by akhalidi         ###   ########.fr       */
+/*   Updated: 2026/02/13 18:20:18 by akhalidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_putnbr_base(unsigned long n, char *base)
 {
-	int	len;
-	int	count;
+	unsigned long	len;
+	unsigned long	count;
 
 	len = ft_strlen(base);
 	count = 0;
